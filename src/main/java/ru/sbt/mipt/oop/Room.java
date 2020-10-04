@@ -5,7 +5,7 @@ import java.util.Collection;
 public class Room {
     private Collection<Light> lights;
     private Collection<Door> doors;
-    private String name;
+    private static String name;
 
     public Room(Collection<Light> lights, Collection<Door> doors, String name) {
         this.lights = lights;
@@ -21,7 +21,7 @@ public class Room {
         return doors;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 }

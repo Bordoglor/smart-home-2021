@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
+
 public class Door {
     private final String id;
     private boolean isOpen;
