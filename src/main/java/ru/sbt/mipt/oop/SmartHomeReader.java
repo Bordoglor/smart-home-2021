@@ -7,7 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class SmartHomeReader {
-    public static SmartHome getSmartHome() throws IOException {
+
+    public SmartHome getSmartHome() throws IOException {
         Gson gson = new Gson();
         String json = new String(Files.readAllBytes(Paths.get("smart-home-1.js")));
         return gson.fromJson(json, SmartHome.class);
