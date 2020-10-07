@@ -14,6 +14,7 @@ public class Application {
         List<Manageable> managers= new ArrayList<>();
         managers.add(new DoorManaging());
         managers.add(new LightManaging());
+        managers.add(new DoorHallManaging());
         EventAction actions = new EventAction(managers, nextEvent);
         // считываем состояние дома из файла
         // начинаем цикл обработки событий

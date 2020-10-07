@@ -1,14 +1,9 @@
 package ru.sbt.mipt.oop;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class SmartHome {
+public class SmartHome implements Actionable {
     Collection<Room> rooms;
 
     public SmartHome() {
@@ -27,4 +22,10 @@ public class SmartHome {
         return rooms;
     }
 
+    @Override
+    public void execute(Action action) {
+        for (Room room: rooms){
+            room.execute(action);
+        }
+    }
 }
