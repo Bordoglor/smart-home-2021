@@ -1,5 +1,9 @@
 package ru.sbt.mipt.oop;
 
+import static ru.sbt.mipt.oop.DoorManaging.*;
+import static ru.sbt.mipt.oop.SensorEventType.*;
+import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
+
 public class SensorEvent {
     private final SensorEventType type;
     private final String objectId;
@@ -24,4 +28,5 @@ public class SensorEvent {
                 ", objectId='" + objectId + '\'' +
                 '}';
     }
+
 }
