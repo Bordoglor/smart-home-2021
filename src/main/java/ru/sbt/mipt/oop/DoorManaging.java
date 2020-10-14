@@ -27,7 +27,7 @@ public class DoorManaging implements Manageable{
         }
     }
 
-    public void allLightOff(SmartHome smartHome) {
+    private void allLightOff(SmartHome smartHome) {
         for (Room homeRoom : smartHome.getRooms()) {
             for (Light light : homeRoom.getLights()) {
                 light.setOn(false);
