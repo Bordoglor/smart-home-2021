@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class SmartHomeReader {
+public class SmartHomeReader implements SmartHomeReadable{
 
     public SmartHome getSmartHome() throws IOException {
         Gson gson = new Gson();

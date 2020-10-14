@@ -1,37 +1,33 @@
 package ru.sbt.mipt.oop;
 
-import java.util.Objects;
-
 import static ru.sbt.mipt.oop.Application.sendCommand;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
-public class DoorManaging implements Manageable{
+public class DoorManaging implements Controllable {
 
     public void manage(SmartHome smartHome, SensorEvent event) {
         System.out.println("Got event: " + event);
         if (event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED) {
-            for (Room room : smartHome.getRooms()) {
-                for (Door door : room.getDoors()) {
+            smartHome.execute(object -> {
+                if (object instanceof Door){
+                    Door door = (Door) object;
                     if (door.getId().equals(event.getObjectId())) {
-                        if (event.getType() == DOOR_OPEN) {
-                            door.setOpen(true);
-                            System.out.println("Door " + door.getId() + " in room " + Room.getName() + " was opened.");
-                        } else {
-                            door.setOpen(false);
-                            System.out.println("Door " + door.getId() + " in room " + Room.getName() + " was closed.");
-                            // если мы получили событие о закрытие двери в холле - это значит, что была закрыта входная дверь.
-                            // в этом случае мы хотим автоматически выключить свет во всем доме (это же умный дом!)
-                            if (Objects.equals(Room.getName(), "hall")) {
-                                allLightOff(smartHome);
-                            }
-                        }
+                    if (event.getType() == DOOR_OPEN) {
+                        door.setOpen(true);
+                        System.out.println("Door " + door.getId() + " in room " + Room.getName() + " was opened.");
+                    } else {
+                        door.setOpen(false);
+                        System.out.println("Door " + door.getId() + " in room " + Room.getName() + " was closed.");
                     }
+
                 }
-            }
+                }
+            });
         }
     }
-    public void allLightOff(SmartHome smartHome) {
+
+    private void allLightOff(SmartHome smartHome) {
         for (Room homeRoom : smartHome.getRooms()) {
             for (Light light : homeRoom.getLights()) {
                 light.setOn(false);
@@ -40,5 +36,4 @@ public class DoorManaging implements Manageable{
             }
         }
     }
-
 }

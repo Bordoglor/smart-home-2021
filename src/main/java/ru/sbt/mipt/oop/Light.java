@@ -1,9 +1,6 @@
 package ru.sbt.mipt.oop;
 
-import static ru.sbt.mipt.oop.Application.sendCommand;
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
-
-public class Light {
+public class Light implements Actionable {
     private boolean isOn;
     private final String id;
 
@@ -22,6 +19,12 @@ public class Light {
 
     public void setOn(boolean on) {
         isOn = on;
+    }
+
+
+    @Override
+    public void execute(Action action) {
+        action.act(this);
     }
 
 }
