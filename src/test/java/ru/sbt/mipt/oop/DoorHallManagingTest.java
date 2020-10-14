@@ -7,13 +7,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static ru.sbt.mipt.oop.SensorEventType.ALARM_DEACTIVATE;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 
 class DoorHallManagingTest {
 
     @Test
     void doorHallManageTestLightOff() {
-        //Door door = new Door(true, "4");
+        Alarm alarm = new Alarm();
         Light light1 = new Light("7", true);
         Light light2 = new Light("8", true);
         Room hall = new Room(Arrays.asList(light1, light2), Arrays.asList(new Door(true, "4")), "hall");
@@ -34,6 +35,7 @@ class DoorHallManagingTest {
 
     @Test
     void doorHallManageTestLightOffAnotherRoom() {
+        Alarm alarm = new Alarm();
         Light light1 = new Light("4", true);
         Light light2 = new Light("5", true);
         Room bedroom = new Room(Arrays.asList(light1, light2),

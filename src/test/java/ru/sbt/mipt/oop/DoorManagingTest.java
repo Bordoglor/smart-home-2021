@@ -7,14 +7,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
+import static ru.sbt.mipt.oop.SensorEventType.*;
 
 class DoorManagingTest {
 
 
     @Test
     void doorManageTestDoorIsOpened() {
+        Alarm alarm = new Alarm();
         Door door = new Door(false, "1");
         Room kitchen = new Room(Arrays.asList(new Light("1", false), new Light("2", true)),
                 Arrays.asList(door),
@@ -34,6 +34,7 @@ class DoorManagingTest {
 
     @Test
     void doorManageTestDoorIsClosed() {
+        Alarm alarm = new Alarm();
         Door door = new Door(true, "1");
         Room kitchen = new Room(Arrays.asList(new Light("1", false),
                 new Light("2", true)),

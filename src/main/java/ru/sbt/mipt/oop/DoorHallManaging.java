@@ -11,7 +11,7 @@ public class DoorHallManaging implements Manageable {
             smartHome.execute(object -> {
                 if (object instanceof Room){
                     Room room = (Room) object;
-                    if (room.getName().equals("hall")) {
+                    if (room != null && room.getName().equals("hall")) {
                         room.execute(object1 -> {
                         if (object1 instanceof Door){
                             Door door = (Door) object1;

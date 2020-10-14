@@ -13,6 +13,7 @@ class LightManagingTest {
 
     @Test
     void lightManageTestLightIsOff() {
+        Alarm alarm = new Alarm();
         Light light = new Light("3", true);
         Room bathroom = new Room(Arrays.asList(light),
                 Arrays.asList(new Door(false, "2")),
@@ -31,6 +32,7 @@ class LightManagingTest {
 
     @Test
     void lightManageTestLightIsOn() {
+        Alarm alarm = new Alarm();
         Light light = new Light("3", false);
         Room bathroom = new Room(Arrays.asList(light),
                 Arrays.asList(new Door(false, "2")),

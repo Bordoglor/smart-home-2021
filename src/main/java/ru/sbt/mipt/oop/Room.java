@@ -28,11 +28,11 @@ public class Room implements Actionable {
     @Override
     public void execute(Action action) {
         for (Light light: lights){
-            action.make(light);
+            action.perform(light);
         }
         for (Door door: doors){
-            action.make(door);
+            action.perform(door);
         }
-        action.make(this);
+        action.perform(this);
     }
 }

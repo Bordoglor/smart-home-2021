@@ -19,7 +19,7 @@ public class Door implements Actionable{
 
     @Override
     public void execute(Action action) {
-        action.make(this);
+        action.perform(this);
     }
 
     public boolean isOpen() {
