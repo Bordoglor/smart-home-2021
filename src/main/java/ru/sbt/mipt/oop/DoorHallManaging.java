@@ -27,7 +27,7 @@ public class DoorHallManaging implements Manageable {
     }
     }
 
-    public void allLightOff(SmartHome smartHome) {
+    private void allLightOff(SmartHome smartHome) {
         smartHome.execute(object -> {
             if (object instanceof Light){
                 Light light = (Light) object;
