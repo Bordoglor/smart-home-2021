@@ -4,7 +4,7 @@ import static ru.sbt.mipt.oop.Application.sendCommand;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
-public class DoorManaging implements Manageable{
+public class DoorManaging implements Controllable {
 
     public void manage(SmartHome smartHome, SensorEvent event) {
         System.out.println("Got event: " + event);
@@ -13,19 +13,19 @@ public class DoorManaging implements Manageable{
                 if (object instanceof Door){
                     Door door = (Door) object;
                     if (door.getId().equals(event.getObjectId())) {
-                    if (event.getType() == DOOR_OPEN) {
-                        door.setOpen(true);
-                        System.out.println("Door " + door.getId() + " in room " + Room.getName() + " was opened.");
-                    } else {
-                        door.setOpen(false);
-                        System.out.println("Door " + door.getId() + " in room " + Room.getName() + " was closed.");
+                        if (event.getType() == DOOR_OPEN) {
+                            door.setOpen(true);
+                            System.out.println("Door " + door.getId() + " was opened.");
+                        } else {
+                            door.setOpen(false);
+                            System.out.println("Door " + door.getId() + " was closed.");
+                        }
                     }
-
-                }
                 }
             });
         }
     }
+<<<<<<< Updated upstream
 
     private void allLightOff(SmartHome smartHome) {
         for (Room homeRoom : smartHome.getRooms()) {
@@ -37,3 +37,6 @@ public class DoorManaging implements Manageable{
         }
     }
 }
+=======
+}
+>>>>>>> Stashed changes

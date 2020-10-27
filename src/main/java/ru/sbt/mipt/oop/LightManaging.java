@@ -3,7 +3,7 @@ package ru.sbt.mipt.oop;
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
-public class LightManaging implements Manageable{
+public class LightManaging implements Controllable {
 
 
     public void manage(SmartHome smartHome, SensorEvent event) {

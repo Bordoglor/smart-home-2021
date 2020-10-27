@@ -9,9 +9,15 @@ public class Application {
     public static void main(String... args) throws IOException {
         NextEventManaging nextEvent = new NextEventManaging();
         SmartHome smartHome = new SmartHomeReader().getSmartHome();
+<<<<<<< Updated upstream
         List<Manageable> managers= new ArrayList<>();
         managers.add(new DecoratorAlarm(new DecoratorMessage(new DoorManaging())));
         managers.add(new DecoratorAlarm(new DecoratorMessage(new LightManaging())));
+=======
+        List<Controllable> managers= new ArrayList<>();
+        managers.add(new DecoratorAlarm(new DoorManaging()));
+        managers.add(new DecoratorAlarm(new LightManaging()));
+>>>>>>> Stashed changes
         managers.add(new DecoratorAlarm(new DecoratorMessage(new DoorHallManaging())));
         EventAction actions = new EventAction(managers, nextEvent);
         // считываем состояние дома из файла

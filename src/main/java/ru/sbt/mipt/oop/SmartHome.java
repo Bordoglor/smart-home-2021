@@ -21,7 +21,11 @@ public class SmartHome implements Actionable {
         rooms.add(room);
     }
 
+<<<<<<< Updated upstream
     public State getState(){
+=======
+    public AlarmState getState(){
+>>>>>>> Stashed changes
         return alarm.getState();
     }
     public Collection<Room> getRooms() {
