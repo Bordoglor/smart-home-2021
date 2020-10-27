@@ -1,8 +1,17 @@
 package ru.sbt.mipt.oop;
 
+<<<<<<< Updated upstream
 import static ru.sbt.mipt.oop.Application.sendCommand;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 
+=======
+import org.springframework.stereotype.Component;
+
+import static ru.sbt.mipt.oop.Application.sendCommand;
+import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
+
+@Component
+>>>>>>> Stashed changes
 public class DoorHallManaging implements Controllable {
 
     @Override

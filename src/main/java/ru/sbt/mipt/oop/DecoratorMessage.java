@@ -3,6 +3,7 @@ package ru.sbt.mipt.oop;
 import static ru.sbt.mipt.oop.SensorEventType.*;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 public class DecoratorMessage implements Manageable{
 
     private Manageable manageable;
@@ -10,17 +11,23 @@ public class DecoratorMessage implements Manageable{
     public DecoratorMessage(Manageable manageable) {
         this.manageable = manageable;
 =======
+=======
+>>>>>>> Stashed changes
 public class DecoratorMessage implements Controllable {
 
     private Controllable controllable;
 
     public DecoratorMessage(Controllable controllable) {
         this.controllable = controllable;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 
     @Override
     public void manage(SmartHome smartHome, SensorEvent event) {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         if (! (event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED ||
                 event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF)){
@@ -32,6 +39,8 @@ public class DecoratorMessage implements Controllable {
             System.out.println("Sending sms");
         }
 =======
+=======
+>>>>>>> Stashed changes
         Alarm alarm = smartHome.alarm;
         if (!(event.getType() == ALARM_ACTIVATE || event.getType() == ALARM_DEACTIVATE)){
             System.out.println("Sending sms");
@@ -39,6 +48,9 @@ public class DecoratorMessage implements Controllable {
         if (smartHome.getState() instanceof AlarmDeactive) {
             controllable.manage(smartHome, event);
         }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 }
