@@ -1,18 +1,12 @@
 package ru.sbt.mipt.oop;
 
-<<<<<<< Updated upstream
-=======
 import org.springframework.stereotype.Component;
 
->>>>>>> Stashed changes
 import static ru.sbt.mipt.oop.Application.sendCommand;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 public class DoorManaging implements Controllable {
 
     public void manage(SmartHome smartHome, SensorEvent event) {
@@ -34,22 +28,4 @@ public class DoorManaging implements Controllable {
             });
         }
     }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-    private void allLightOff(SmartHome smartHome) {
-        for (Room homeRoom : smartHome.getRooms()) {
-            for (Light light : homeRoom.getLights()) {
-                light.setOn(false);
-                SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
-                sendCommand(command);
-            }
-        }
-    }
 }
-=======
-}
->>>>>>> Stashed changes
-=======
-}
->>>>>>> Stashed changes

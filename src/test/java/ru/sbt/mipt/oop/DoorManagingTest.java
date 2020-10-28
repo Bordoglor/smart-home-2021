@@ -20,19 +20,11 @@ class DoorManagingTest {
                 Arrays.asList(door),
                 "kitchen");
         SmartHome smartHome = new SmartHome(Arrays.asList(kitchen));
-<<<<<<< Updated upstream
-        List<Manageable> managers = new ArrayList<>();
-        managers.add(new DoorManaging());
-
-        SensorEvent event = new SensorEvent(DOOR_OPEN, "1");
-        for (Manageable manager : managers) {
-=======
         List<Controllable> managers = new ArrayList<>();
         managers.add(new DoorManaging());
 
         SensorEvent event = new SensorEvent(DOOR_OPEN, "1");
         for (Controllable manager : managers) {
->>>>>>> Stashed changes
             manager.manage(smartHome, event);
         }
         boolean result = door.isOpen();
@@ -49,19 +41,11 @@ class DoorManagingTest {
                 Arrays.asList(door),
                 "kitchen");
         SmartHome smartHome = new SmartHome(Arrays.asList(kitchen));
-<<<<<<< Updated upstream
-        List<Manageable> managers = new ArrayList<>();
-        managers.add(new DoorManaging());
-
-        SensorEvent event = new SensorEvent(DOOR_CLOSED, "1");
-        for (Manageable manager : managers) {
-=======
         List<Controllable> managers = new ArrayList<>();
         managers.add(new DoorManaging());
 
         SensorEvent event = new SensorEvent(DOOR_CLOSED, "1");
         for (Controllable manager : managers) {
->>>>>>> Stashed changes
             manager.manage(smartHome, event);
         }
         boolean result = door.isOpen();

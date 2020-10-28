@@ -1,33 +1,22 @@
 package ru.sbt.mipt.oop;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.support.AbstractApplicationContext;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@ComponentScan("ru.sbt.mipt.oop")
+
 public class Application {
 
-    public static void main(String... args) throws IOException {
-        NextEventManaging nextEvent = new NextEventManaging();
-        SmartHome smartHome = new SmartHomeReader().getSmartHome();
-<<<<<<< Updated upstream
-        List<Manageable> managers= new ArrayList<>();
-        managers.add(new DecoratorAlarm(new DecoratorMessage(new DoorManaging())));
-        managers.add(new DecoratorAlarm(new DecoratorMessage(new LightManaging())));
-=======
-        List<Controllable> managers= new ArrayList<>();
-        managers.add(new DecoratorAlarm(new DoorManaging()));
-        managers.add(new DecoratorAlarm(new LightManaging()));
->>>>>>> Stashed changes
-        managers.add(new DecoratorAlarm(new DecoratorMessage(new DoorHallManaging())));
-        EventAction actions = new EventAction(managers, nextEvent);
-        // считываем состояние дома из файла
-        // начинаем цикл обработки событий
-        SensorEvent event = nextEvent.getNextSensorEvent();
-        //getEvent(smartHome, event);
-        actions.actEvent(smartHome, event);
+    public static void main(String[] args) {
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(ConfigurationSpring.class);
+        SensorEventsManager sensorEventsManager = context.getBean(SensorEventsManager.class);
+        sensorEventsManager.start();
     }
-
-
 
     public static void sendCommand(SensorCommand command) {
         System.out.println("Pretent we're sending command " + command);

@@ -20,20 +20,11 @@ public class Room implements Actionable {
     @Override
     public void execute(Action action) {
         for (Light light: lights){
-<<<<<<< Updated upstream
-            action.perform(light);
-        }
-        for (Door door: doors){
-            action.perform(door);
-        }
-        action.perform(this);
-=======
             action.act(light);
         }
         for (Door door: doors){
             action.act(door);
         }
         action.act(this);
->>>>>>> Stashed changes
     }
 }

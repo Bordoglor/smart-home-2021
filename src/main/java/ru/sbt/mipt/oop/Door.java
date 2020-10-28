@@ -19,11 +19,7 @@ public class Door implements Actionable{
 
     @Override
     public void execute(Action action) {
-<<<<<<< Updated upstream
-        action.perform(this);
-=======
         action.act(this);
->>>>>>> Stashed changes
     }
 
     public boolean isOpen() {

@@ -19,19 +19,11 @@ class LightManagingTest {
                 Arrays.asList(new Door(false, "2")),
                 "bathroom");
         SmartHome smartHome = new SmartHome(Arrays.asList(bathroom));
-<<<<<<< Updated upstream
-        List<Manageable> managers = new ArrayList<>();
-        managers.add(new LightManaging());
-
-        SensorEvent event = new SensorEvent(LIGHT_OFF, "3");
-        for (Manageable manager : managers) {
-=======
         List<Controllable> managers = new ArrayList<>();
         managers.add(new LightManaging());
 
         SensorEvent event = new SensorEvent(LIGHT_OFF, "3");
         for (Controllable manager : managers) {
->>>>>>> Stashed changes
             manager.manage(smartHome, event);
         }
         boolean result = light.isOn();
@@ -46,19 +38,11 @@ class LightManagingTest {
                 Arrays.asList(new Door(false, "2")),
                 "bathroom");
         SmartHome smartHome = new SmartHome(Arrays.asList(bathroom));
-<<<<<<< Updated upstream
-        List<Manageable> managers = new ArrayList<>();
-        managers.add(new LightManaging());
-
-        SensorEvent event = new SensorEvent(LIGHT_ON, "3");
-        for (Manageable manager : managers) {
-=======
         List<Controllable> managers = new ArrayList<>();
         managers.add(new LightManaging());
 
         SensorEvent event = new SensorEvent(LIGHT_ON, "3");
         for (Controllable manager : managers) {
->>>>>>> Stashed changes
             manager.manage(smartHome, event);
         }
         boolean result = light.isOn();

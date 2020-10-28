@@ -1,19 +1,11 @@
 package ru.sbt.mipt.oop;
 
-<<<<<<< Updated upstream
-=======
 import org.springframework.stereotype.Component;
 
->>>>>>> Stashed changes
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
 public class LightManaging implements Controllable {
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
     public void manage(SmartHome smartHome, SensorEvent event) {
         // событие от источника света
         System.out.println("Got event: " + event);

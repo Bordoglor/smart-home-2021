@@ -19,7 +19,7 @@ public class ConfigurationSpring {
     public SensorEventsManager getSensorEvent(Collection<Controllable> managers, SmartHome smartHome, Converter converter){
         SensorEventsManager sensorEventsManager= new SensorEventsManager();
         managers.stream()
-                .map(mn -> new SensorEventAdapter(mn, smartHome, converter))
+                .map(manager -> new SensorEventAdapter(manager, smartHome, converter))
                 .forEach(sensorEventsManager::registerEventHandler);
         return sensorEventsManager;
     }
@@ -38,11 +38,4 @@ public class ConfigurationSpring {
     public Controllable getDoorHallManaging(){
         return new DecoratorAlarm(new DecoratorMessage(new DoorHallManaging()));
     }
-
-   // @Bean
-   /* public Converter getConverter(){
-        return new Converter();
-    }
-
-    */
 }

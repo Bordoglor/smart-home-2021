@@ -17,20 +17,17 @@ public class SmartHome implements Actionable {
         this.alarm = new Alarm();
     }
 
-    public void addRoom(Room room) {
+ /*   public void addRoom(Room room) {
         rooms.add(room);
     }
-
-<<<<<<< Updated upstream
-    public State getState(){
-=======
+*/
     public AlarmState getState(){
->>>>>>> Stashed changes
         return alarm.getState();
     }
-    public Collection<Room> getRooms() {
+  /*  public Collection<Room> getRooms() {
         return rooms;
     }
+   */
 
     @Override
     public void execute(Action action) {
