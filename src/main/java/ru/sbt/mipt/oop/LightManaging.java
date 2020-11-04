@@ -15,8 +15,10 @@ public class LightManaging implements Controllable {
                 if (light.getId().equals(event.getObjectId())) {
                     if (event.getType() == LIGHT_ON) {
                         light.setOn(true);
+                        System.out.println("Light " + light.getId() + " was turned on.");
                     } else {
                         light.setOn(false);
+                        System.out.println("Light " + light.getId() + " was turned off.");
                     }
                 }
             }

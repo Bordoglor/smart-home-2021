@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Collection;
+import java.util.Map;
 
 @Configuration
 @ComponentScan
@@ -37,5 +38,31 @@ public class ConfigurationSpring {
     @Bean
     public Controllable getDoorHallManaging(){
         return new DecoratorAlarm(new DecoratorMessage(new DoorHallManaging()));
+    }
+
+    @Bean
+    public RemoteControlRegistry getRemoteControlRegistry(Collection<RemoteControl> remoteControls) {
+        RemoteControlRegistry registry = new RemoteControlRegistry();
+        remoteControls.forEach(e -> {
+            registry.registerRemoteControl(e);
+        });
+        return registry;
+    }
+
+    @Bean
+    public SmartHomeRemoteControl getSmartHomeRemoteControl(Map<String, RemoteControlSignal> commands) {
+        Map<String, String> nameToCode = Map.of(
+                "turnOnLightCommand", "A",
+                "closeHallDoorCommand", "B",
+                "turnOnHallLightCommand", "C",
+                "activateSignalingCommand", "D",
+                "alarmSignalingCommand", "1",
+                "turnOffLightCommand", "2"
+        );
+        SmartHomeRemoteControl remoteControl = new SmartHomeRemoteControl();
+        commands.forEach((k, v) -> {
+            remoteControl.setButton(nameToCode.get(k), v);
+        });
+        return remoteControl;
     }
 }
