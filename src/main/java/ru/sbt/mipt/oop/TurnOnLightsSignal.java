@@ -10,19 +10,16 @@ public class TurnOnLightsSignal implements RemoteControlSignal{
         this.smartHome = smartHome;
     }
 
-    private void setOnLight(Light light) {
-        light.setOn(true);
-        System.out.println("Light " + light.getId() + " was turned on.");
-    }
 
     @Override
     public void execute() {
-        smartHome.execute(o -> {
-            if (!(o instanceof Light)) {
+        smartHome.execute(object -> {
+            if (!(object instanceof Light)) {
                 return;
             }
-            Light light = (Light) o;
-            setOnLight(light);
+            Light light = (Light) object;
+            light.setOn(true);
+            System.out.println("Light " + light.getId() + " was turned on.");
         });
     }
 }

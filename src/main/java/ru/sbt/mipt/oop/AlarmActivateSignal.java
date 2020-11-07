@@ -12,9 +12,10 @@ public class AlarmActivateSignal implements RemoteControlSignal{
 
     @Override
     public void execute() {
-        smartHome.execute(o -> {
-            if (o instanceof Alarm) {
-                ((Alarm) o).activate("default_code");
+        smartHome.execute(object -> {
+            if (object instanceof Alarm) {
+                Alarm alarm = (Alarm) object;
+                alarm.activate("0");
             }
         });
     }

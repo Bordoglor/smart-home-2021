@@ -10,25 +10,21 @@ public class TurnOnHallLightSignal implements RemoteControlSignal{
         this.smartHome = smartHome;
     }
 
-    private void turnOnLight(Light light) {
-        light.setOn(true);
-        System.out.println("Hall-light was turned on.");
-    }
-
     @Override
     public void execute() {
-        smartHome.execute(o -> {
-            if (!(o instanceof Room)) {
+        smartHome.execute(object -> {
+            if (!(object instanceof Room)) {
                 return;
             }
-            Room room = (Room) o;
+            Room room = (Room) object;
             if ("hall".equals(room.getName())) {
-                room.execute(c -> {
-                    if (!(c instanceof Light)) {
+                room.execute(obj -> {
+                    if (!(obj instanceof Light)) {
                         return;
                     }
-                    Light light = (Light) c;
-                    turnOnLight(light);
+                    Light light = (Light) obj;
+                    light.setOn(true);
+                    System.out.println("Hall-light was turned on.");
                 });
             }
         });

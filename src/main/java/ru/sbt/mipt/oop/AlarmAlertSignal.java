@@ -12,9 +12,10 @@ public class AlarmAlertSignal implements RemoteControlSignal{
 
     @Override
     public void execute() {
-        smartHome.execute(o -> {
-            if (o instanceof Alarm) {
-                ((Alarm) o).alarmAlert();
+        smartHome.execute(object -> {
+            if (object instanceof Alarm) {
+                Alarm alarm = (Alarm) object;
+                alarm.alarmAlert();
             }
         });
     }

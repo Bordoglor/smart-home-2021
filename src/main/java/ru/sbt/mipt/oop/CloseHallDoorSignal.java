@@ -10,25 +10,21 @@ public class CloseHallDoorSignal implements RemoteControlSignal{
         this.smartHome = smartHome;
     }
 
-    private void closeDoor(Door door) {
-        door.setOpen(false);
-        System.out.println("Hall-door was closed.");
-    }
-
     @Override
     public void execute() {
-        smartHome.execute(o -> {
-            if (!(o instanceof Room)) {
+        smartHome.execute(object -> {
+            if (!(object instanceof Room)) {
                 return;
             }
-            Room room = (Room) o;
-            if ("hall".equals(room.getName())) {
-                room.execute(c -> {
-                    if (!(c instanceof Door)) {
+            Room room = (Room) object;
+            if (room.getName().equals("hall")) {
+                room.execute(obj -> {
+                    if (!(obj instanceof Door)) {
                         return;
                     }
-                    Door door = (Door) c;
-                    closeDoor(door);
+                    Door door = (Door) obj;
+                    door.setOpen(false);
+                    System.out.println("Hall door was closed.");
                 });
             }
         });

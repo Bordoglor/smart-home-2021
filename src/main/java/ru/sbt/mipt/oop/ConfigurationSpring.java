@@ -12,12 +12,12 @@ import java.util.Map;
 public class ConfigurationSpring {
 
     @Bean
-    public SmartHome getSmartHome(SmartHomeReader smartHomeReader){
+    public SmartHome smartHome(SmartHomeReader smartHomeReader){
         return smartHomeReader.getSmartHome();
     }
 
     @Bean
-    public SensorEventsManager getSensorEvent(Collection<Controllable> managers, SmartHome smartHome, Converter converter){
+    public SensorEventsManager sensorEvent(Collection<Controllable> managers, SmartHome smartHome, Converter converter){
         SensorEventsManager sensorEventsManager= new SensorEventsManager();
         managers.stream()
                 .map(manager -> new SensorEventAdapter(manager, smartHome, converter))
@@ -26,22 +26,22 @@ public class ConfigurationSpring {
     }
 
     @Bean
-    public Controllable getDoorManaging(){
+    public Controllable doorManaging(){
         return new DecoratorAlarm(new DoorManaging());
     }
 
     @Bean
-    public Controllable getLightManaging(){
+    public Controllable lightManaging(){
         return new DecoratorAlarm(new LightManaging());
     }
 
     @Bean
-    public Controllable getDoorHallManaging(){
+    public Controllable doorHallManaging(){
         return new DecoratorAlarm(new DecoratorMessage(new DoorHallManaging()));
     }
 
     @Bean
-    public RemoteControlRegistry getRemoteControlRegistry(Collection<RemoteControl> remoteControls) {
+    public RemoteControlRegistry remoteControlRegistry(Collection<RemoteControl> remoteControls) {
         RemoteControlRegistry registry = new RemoteControlRegistry();
         remoteControls.forEach(e -> {
             registry.registerRemoteControl(e);
@@ -50,14 +50,14 @@ public class ConfigurationSpring {
     }
 
     @Bean
-    public SmartHomeRemoteControl getSmartHomeRemoteControl(Map<String, RemoteControlSignal> commands) {
+    public SmartHomeRemoteControl smartHomeRemoteControl(Map<String, RemoteControlSignal> commands) {
         Map<String, String> nameToCode = Map.of(
-                "turnOnLightCommand", "A",
-                "closeHallDoorCommand", "B",
-                "turnOnHallLightCommand", "C",
-                "activateSignalingCommand", "D",
-                "alarmSignalingCommand", "1",
-                "turnOffLightCommand", "2"
+                "turnOnLightsSignal", "A",
+                "closeHallDoorSignal", "B",
+                "turnOnHallLightSignal", "C",
+                "alarmActivateSignal", "D",
+                "alarmAlertSignal", "1",
+                "turnOffLightsSignal", "2"
         );
         SmartHomeRemoteControl remoteControl = new SmartHomeRemoteControl();
         commands.forEach((k, v) -> {
