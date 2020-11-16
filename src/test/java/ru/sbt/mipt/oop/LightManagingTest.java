@@ -1,3 +1,4 @@
+
 package ru.sbt.mipt.oop;
 
 import org.junit.jupiter.api.Test;
@@ -19,11 +20,11 @@ class LightManagingTest {
                 Arrays.asList(new Door(false, "2")),
                 "bathroom");
         SmartHome smartHome = new SmartHome(Arrays.asList(bathroom));
-        List<Manageable> managers = new ArrayList<>();
+        List<Controllable> managers = new ArrayList<>();
         managers.add(new LightManaging());
 
         SensorEvent event = new SensorEvent(LIGHT_OFF, "3");
-        for (Manageable manager : managers) {
+        for (Controllable manager : managers) {
             manager.manage(smartHome, event);
         }
         boolean result = light.isOn();
@@ -38,11 +39,11 @@ class LightManagingTest {
                 Arrays.asList(new Door(false, "2")),
                 "bathroom");
         SmartHome smartHome = new SmartHome(Arrays.asList(bathroom));
-        List<Manageable> managers = new ArrayList<>();
+        List<Controllable> managers = new ArrayList<>();
         managers.add(new LightManaging());
 
         SensorEvent event = new SensorEvent(LIGHT_ON, "3");
-        for (Manageable manager : managers) {
+        for (Controllable manager : managers) {
             manager.manage(smartHome, event);
         }
         boolean result = light.isOn();
