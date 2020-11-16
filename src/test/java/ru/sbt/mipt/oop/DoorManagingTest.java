@@ -20,11 +20,11 @@ class DoorManagingTest {
                 Arrays.asList(door),
                 "kitchen");
         SmartHome smartHome = new SmartHome(Arrays.asList(kitchen));
-        List<Manageable> managers = new ArrayList<>();
+        List<Controllable> managers = new ArrayList<>();
         managers.add(new DoorManaging());
 
         SensorEvent event = new SensorEvent(DOOR_OPEN, "1");
-        for (Manageable manager : managers) {
+        for (Controllable manager : managers) {
             manager.manage(smartHome, event);
         }
         boolean result = door.isOpen();
@@ -41,11 +41,11 @@ class DoorManagingTest {
                 Arrays.asList(door),
                 "kitchen");
         SmartHome smartHome = new SmartHome(Arrays.asList(kitchen));
-        List<Manageable> managers = new ArrayList<>();
+        List<Controllable> managers = new ArrayList<>();
         managers.add(new DoorManaging());
 
         SensorEvent event = new SensorEvent(DOOR_CLOSED, "1");
-        for (Manageable manager : managers) {
+        for (Controllable manager : managers) {
             manager.manage(smartHome, event);
         }
         boolean result = door.isOpen();
