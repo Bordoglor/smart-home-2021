@@ -1,3 +1,4 @@
+
 package ru.sbt.mipt.oop;
 
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.sbt.mipt.oop.SensorEventType.ALARM_DEACTIVATE;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 
 class DoorHallManagingTest {
@@ -19,11 +19,11 @@ class DoorHallManagingTest {
         Light light2 = new Light("8", true);
         Room hall = new Room(Arrays.asList(light1, light2), Arrays.asList(new Door(true, "4")), "hall");
         SmartHome smartHome = new SmartHome(Arrays.asList(hall));
-        List<Manageable> managers = new ArrayList<>();
+        List<Controllable> managers = new ArrayList<>();
         managers.add(new LightManaging());
         managers.add(new DoorHallManaging());
         SensorEvent event = new SensorEvent(DOOR_CLOSED, "4");
-        for (Manageable manager: managers) {
+        for (Controllable manager: managers) {
             manager.manage(smartHome, event);
         }
 
@@ -43,12 +43,12 @@ class DoorHallManagingTest {
                 "bedroom");
         Room hall = new Room(Arrays.asList(new Light("7", false)), Arrays.asList(new Door(true, "4")), "hall");
         SmartHome smartHome = new SmartHome(Arrays.asList(bedroom, hall));
-        List<Manageable> managers = new ArrayList<>();
+        List<Controllable> managers = new ArrayList<>();
         managers.add(new DoorManaging());
         managers.add(new LightManaging());
         managers.add(new DoorHallManaging());
         SensorEvent event = new SensorEvent(DOOR_CLOSED, "4");
-        for (Manageable manager: managers) {
+        for (Controllable manager: managers) {
             manager.manage(smartHome, event);
         }
 
