@@ -1,8 +1,5 @@
 package ru.sbt.mipt.oop;
 
-import org.springframework.stereotype.Component;
-
-import static ru.sbt.mipt.oop.Application.sendCommand;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 

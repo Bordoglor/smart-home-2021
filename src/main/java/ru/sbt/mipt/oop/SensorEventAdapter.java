@@ -1,19 +1,18 @@
 package ru.sbt.mipt.oop;
 
-public class SensorEventAdapter implements EventHandler{
-    private Controllable controllable;
-    private SmartHome smartHome;
-    private Converter converter;
+import org.springframework.stereotype.Component;
 
-    public SensorEventAdapter(Controllable controllable, SmartHome smartHome, Converter converter) {
-        this.controllable = controllable;
-        this.smartHome = smartHome;
-        this.converter = converter;
+import java.util.Map;
+
+public class SensorEventAdapter {
+    private final SensorEvent sensorEvent;
+
+    public SensorEvent getSensorEvent() {
+        return sensorEvent;
     }
 
-    @Override
-    public void handleEvent(CCSensorEvent event) {
-        SensorEvent sensorEvent = converter.convertEvent(event);
-        controllable.manage(smartHome, sensorEvent);
+    public SensorEventAdapter(CCSensorEvent ccSensorEvent, Map<String, SensorEventType> converterMap) {
+        this.sensorEvent = new SensorEvent(converterMap
+                .get(ccSensorEvent.getEventType()), ccSensorEvent.getObjectId());
     }
 }

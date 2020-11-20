@@ -29,4 +29,7 @@ public class SensorEventsManager {
         String objectId = "" + ((int) (10 * Math.random()));
         return new CCSensorEvent(sensorEventType, objectId);
     }
+
+    public void registerEventHandler(SensorEventAdapter sensorEventAdapter) {
+    }
 }
