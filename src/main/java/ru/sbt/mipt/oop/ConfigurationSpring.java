@@ -52,30 +52,4 @@ public class ConfigurationSpring {
     public Converter signalingHandlerAdapter(AlarmManaging alarmManaging, SmartHome smartHome){
         return new Converter(alarmManaging, smartHome, converterMap());
     }
-
-    @Bean
-    public RemoteControlRegistry remoteControlRegistry(Collection<RemoteControl> remoteControls) {
-        RemoteControlRegistry registry = new RemoteControlRegistry();
-        remoteControls.forEach(e -> {
-            registry.registerRemoteControl(e);
-        });
-        return registry;
-    }
-
-    @Bean
-    public SmartHomeRemoteControl smartHomeRemoteControl(Map<String, RemoteControlSignal> commands) {
-        Map<String, String> nameToCode = Map.of(
-                "turnOnLightsSignal", "A",
-                "closeHallDoorSignal", "B",
-                "turnOnHallLightSignal", "C",
-                "alarmActivateSignal", "D",
-                "alarmAlertSignal", "1",
-                "turnOffLightsSignal", "2"
-        );
-        SmartHomeRemoteControl remoteControl = new SmartHomeRemoteControl();
-        commands.forEach((k, v) -> {
-            remoteControl.setButton(nameToCode.get(k), v);
-        });
-        return remoteControl;
-    }
 }
