@@ -5,20 +5,20 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-public class Converter {
-    Map<String, SensorEventType> hashMap = new HashMap<>();
+public class Converter implements EventHandler {
+    private Controllable controllable;
+    private SmartHome smartHome;
+    private Map<String, SensorEventType> converterMap;
 
-    public Converter(){
-        hashMap.put("LightIsOn", SensorEventType.LIGHT_ON);
-        hashMap.put("LightIsOff", SensorEventType.LIGHT_OFF);
-        hashMap.put("DoorIsOpen", SensorEventType.DOOR_OPEN);
-        hashMap.put("DoorIsClosed", SensorEventType.DOOR_CLOSED);
-        hashMap.put("DoorIsLocked", SensorEventType.ALARM_ACTIVATE);
-        hashMap.put("DoorIsUnlocked", SensorEventType.ALARM_DEACTIVATE);
+    public Converter(Controllable controllable, SmartHome smartHome, Map<String, SensorEventType> converterMap) {
+        this.controllable = controllable;
+        this.smartHome = smartHome;
+        this.converterMap = converterMap;
     }
 
-    public SensorEvent convertEvent(CCSensorEvent event) {
-        return new SensorEvent(hashMap.get(event.getEventType()), event.getObjectId());
+    @Override
+    public void handleEvent(CCSensorEvent event) {
+        SensorEvent sensorEvent = new SensorEventAdapter(event, converterMap).getSensorEvent();
+        controllable.manage(smartHome, sensorEvent);
     }
 }

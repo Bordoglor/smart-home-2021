@@ -5,16 +5,16 @@ import java.util.Map;
 import java.util.Set;
 
 public class SmartHomeRemoteControl implements RemoteControl{
-    private final Map<String, RemoteControlSignal> buttons = new HashMap<>();
-    private final Set<String> codes = Set.of("A", "B", "C", "D", "1", "2", "3", "4");
+    private final Map<String, RemoteControlSignal> buttons;
 
-    public void setButton(String buttonCode, RemoteControlSignal command) {
-        if (codes.contains(buttonCode) && codes != null) {
-            buttons.put(buttonCode, command);
-        }
+    public SmartHomeRemoteControl(Map<String, RemoteControlSignal> buttons) {
+        this.buttons = buttons;
     }
+
     @Override
     public void onButtonPressed(String buttonCode) {
+        if (buttons.containsKey(buttonCode)){
             buttons.get(buttonCode).execute();
+        }
     }
 }

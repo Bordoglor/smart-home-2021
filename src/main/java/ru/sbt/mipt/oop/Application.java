@@ -17,8 +17,4 @@ public class Application {
         SensorEventsManager sensorEventsManager = context.getBean(SensorEventsManager.class);
         sensorEventsManager.start();
     }
-
-    public static void sendCommand(SensorCommand command) {
-        System.out.println("Pretent we're sending command " + command);
-    }
 }

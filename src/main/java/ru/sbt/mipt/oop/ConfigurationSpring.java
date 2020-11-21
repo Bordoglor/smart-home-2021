@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
@@ -17,27 +18,50 @@ public class ConfigurationSpring {
     }
 
     @Bean
-    public SensorEventsManager sensorEvent(Collection<Controllable> managers, SmartHome smartHome, Converter converter){
-        SensorEventsManager sensorEventsManager= new SensorEventsManager();
-        managers.stream()
-                .map(manager -> new SensorEventAdapter(manager, smartHome, converter))
-                .forEach(sensorEventsManager::registerEventHandler);
+    public SensorEventsManager sensorEvent(Collection<Converter> adapters){
+        SensorEventsManager sensorEventsManager = new SensorEventsManager();
+        adapters.forEach(sensorEventsManager::registerEventHandler);
         return sensorEventsManager;
     }
 
     @Bean
-    public Controllable doorManaging(){
-        return new DecoratorAlarm(new DoorManaging());
+    public Map<String, SensorEventType> converterMap() {
+        return Map.of("LightIsOn", SensorEventType.LIGHT_ON,
+        "LightIsOff", SensorEventType.LIGHT_OFF,
+        "DoorIsOpen", SensorEventType.DOOR_OPEN,
+        "DoorIsClosed", SensorEventType.DOOR_CLOSED,
+        "DoorIsLocked", SensorEventType.ALARM_ACTIVATE,
+        "DoorIsUnlocked", SensorEventType.ALARM_DEACTIVATE);
     }
 
     @Bean
-    public Controllable lightManaging(){
-        return new DecoratorAlarm(new LightManaging());
+    public Converter doorManaging(SmartHome smartHome){
+        return new Converter(new DecoratorAlarm(new DecoratorMessage(new DoorManaging())), smartHome, converterMap());
     }
 
     @Bean
-    public Controllable doorHallManaging(){
-        return new DecoratorAlarm(new DecoratorMessage(new DoorHallManaging()));
+    public Converter lightManaging(SmartHome smartHome){
+        return new Converter(new DecoratorAlarm(new LightManaging()), smartHome, converterMap());
+    }
+
+    @Bean
+    public Converter doorHallManaging(SmartHome smartHome){
+        return new Converter(new DecoratorAlarm(new DoorHallManaging()), smartHome, converterMap());
+    }
+
+    @Bean
+    public Converter signalingHandlerAdapter(AlarmManaging alarmManaging, SmartHome smartHome){
+        return new Converter(alarmManaging, smartHome, converterMap());
+    }
+
+    @Bean
+    public Map<String, String> commandButtonsMap(){
+        return Map.of("turnOnLightsSignal", "A",
+                "closeHallDoorSignal", "B",
+                "turnOnHallLightSignal", "C",
+                "alarmActivateSignal", "D",
+                "alarmAlertSignal", "1",
+                "turnOffLightsSignal", "2");
     }
 
     @Bean
@@ -46,23 +70,20 @@ public class ConfigurationSpring {
         remoteControls.forEach(e -> {
             registry.registerRemoteControl(e);
         });
-        return registry;
+        return new RemoteControlRegistry();
     }
 
     @Bean
     public SmartHomeRemoteControl smartHomeRemoteControl(Map<String, RemoteControlSignal> commands) {
-        Map<String, String> nameToCode = Map.of(
-                "turnOnLightsSignal", "A",
-                "closeHallDoorSignal", "B",
-                "turnOnHallLightSignal", "C",
-                "alarmActivateSignal", "D",
-                "alarmAlertSignal", "1",
-                "turnOffLightsSignal", "2"
-        );
-        SmartHomeRemoteControl remoteControl = new SmartHomeRemoteControl();
-        commands.forEach((k, v) -> {
-            remoteControl.setButton(nameToCode.get(k), v);
+        return new SmartHomeRemoteControl(commands);
+    }
+
+    @Bean
+    public Map<String, RemoteControlSignal> buttons(Map<String, RemoteControlSignal> remoteSignals){
+        Map<String, RemoteControlSignal> commands = new HashMap<>();
+        remoteSignals.forEach((k, v) -> {
+            commands.put(commandButtonsMap().get(k), v);
         });
-        return remoteControl;
+        return commands;
     }
 }
