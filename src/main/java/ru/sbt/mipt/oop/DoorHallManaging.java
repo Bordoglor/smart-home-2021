@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop;
 
-import static ru.sbt.mipt.oop.Application.sendCommand;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 
 public class DoorHallManaging implements Controllable {
@@ -32,8 +31,6 @@ public class DoorHallManaging implements Controllable {
             if (object instanceof Light){
                 Light light = (Light) object;
                 light.setOn(false);
-                SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
-                sendCommand(command);
             }
         });
     }
