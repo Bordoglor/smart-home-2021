@@ -10,9 +10,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import static ru.sbt.mipt.oop.SensorEventType.ALARM_DEACTIVATE;
+
 public class HomeBuilder {
 
     public static void main(String[] args) throws IOException {
+        Alarm alarm = new Alarm();
         Room kitchen = new Room(Arrays.asList(new Light("1", false), new Light("2", true)),
                 Arrays.asList(new Door(false, "1")),
                 "kitchen");
