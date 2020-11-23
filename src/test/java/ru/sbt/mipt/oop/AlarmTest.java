@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.sbt.mipt.oop.SensorEventType.ALARM_ACTIVATE;
-import static ru.sbt.mipt.oop.SensorEventType.ALARM_DEACTIVATE;
 
 class AlarmTest {
 
@@ -17,10 +15,9 @@ class AlarmTest {
                 "kitchen");
 
         Alarm alarm = new Alarm();
-        //SmartHome smartHome = new SmartHome(Arrays.asList(kitchen), alarm);
         String code = "12345";
         alarm.activate(code);
-        assertTrue(alarm.getState() instanceof AlarmActive);
+        assertTrue(alarm.isActivated());
     }
 
     @Test
@@ -33,7 +30,7 @@ class AlarmTest {
         alarm.setState(new AlarmActive());
         String code = "12345";
         alarm.activate(code);
-        assertTrue(alarm.getState() instanceof AlarmActive);
+        assertTrue(alarm.isActivated());
     }
 
     @Test
@@ -42,7 +39,7 @@ class AlarmTest {
         alarm.setState(new AlarmDeactive());
         String code = "12345";
         alarm.deactivate(code);
-        assertTrue(alarm.getState() instanceof AlarmDeactive);
+        assertTrue(alarm.isDeactivated());
     }
     @Test
     void deactivateIfActivateTest() {
@@ -50,7 +47,7 @@ class AlarmTest {
         alarm.setState(new AlarmActive());
         String code = "0";
         alarm.deactivate(code);
-        assertTrue(alarm.getState() instanceof AlarmDeactive);
+        assertTrue(alarm.isDeactivated());
     }
 
     @Test
@@ -59,7 +56,7 @@ class AlarmTest {
         alarm.setState(new AlarmActive());
         String code = "54321";
         alarm.deactivate(code);
-        assertTrue(alarm.getState() instanceof AlarmAlert);
+        assertTrue(alarm.isAlert());
     }
 
     @Test
@@ -68,6 +65,6 @@ class AlarmTest {
         String code = "0";
         alarm.setState(new AlarmAlert());
         alarm.deactivate(code);
-        assertTrue(alarm.getState() instanceof AlarmDeactive);
+        assertTrue(alarm.isDeactivated());
     }
 }

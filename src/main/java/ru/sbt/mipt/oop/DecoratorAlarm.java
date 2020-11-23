@@ -1,7 +1,6 @@
 package ru.sbt.mipt.oop;
 
 import static ru.sbt.mipt.oop.SensorEventType.*;
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 
 public class DecoratorAlarm implements Controllable {
 
@@ -15,7 +14,7 @@ public class DecoratorAlarm implements Controllable {
     public void manage(SmartHome smartHome, SensorEvent event) {
         Alarm alarm = smartHome.alarm;
         controllable.manage(smartHome, event);
-        if (!(event.getType() == ALARM_ACTIVATE || event.getType() == ALARM_DEACTIVATE) && alarm.isAlarm()){
+        if (!(event.getType() == ALARM_ACTIVATE || event.getType() == ALARM_DEACTIVATE) && alarm.isActivated()){
             alarm.alarmAlert();
             System.out.println("Alert");
         }

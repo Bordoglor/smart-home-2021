@@ -14,10 +14,12 @@ public class DecoratorMessage implements Controllable {
 
     @Override
     public void manage(SmartHome smartHome, SensorEvent event) {
+        Alarm alarm = smartHome.alarm;
+
         if (!(event.getType() == ALARM_ACTIVATE || event.getType() == ALARM_DEACTIVATE)){
             notifier.inform();
         }
-        if (smartHome.getState() instanceof AlarmDeactive) {
+        if (alarm.isDeactivated() == true) {
             controllable.manage(smartHome, event);
         }
     }
