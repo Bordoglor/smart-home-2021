@@ -10,14 +10,20 @@ public class Alarm implements Actionable{
         this.alarmState = new AlarmDeactive();
     }
 
-    public String getCode() {
-        return code;
+    public boolean isAlarm() {
+        if (alarmState instanceof AlarmActive){
+            return true;
+        }
+        return false;
     }
 
-    public void setCode(String code) {
+    private void setCode(String code) {
         if (code != null) {
             this.code = code;
         }
+    }
+    public String getCode() {
+        return code;
     }
 
     public AlarmState getState() {

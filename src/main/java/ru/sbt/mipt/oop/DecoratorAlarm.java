@@ -15,7 +15,7 @@ public class DecoratorAlarm implements Controllable {
     public void manage(SmartHome smartHome, SensorEvent event) {
         Alarm alarm = smartHome.alarm;
         controllable.manage(smartHome, event);
-        if (!(event.getType() == ALARM_ACTIVATE || event.getType() == ALARM_DEACTIVATE) && alarm.getState() instanceof AlarmActive){
+        if (!(event.getType() == ALARM_ACTIVATE || event.getType() == ALARM_DEACTIVATE) && alarm.isAlarm()){
             alarm.alarmAlert();
             System.out.println("Alert");
         }
